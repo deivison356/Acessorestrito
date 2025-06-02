@@ -77,8 +77,8 @@
         } else {
             tentativas++;
             if (tentativas >= 2) {
-                alert('Número máximo de tentativas excedido! Redirecionando...');
-                window.location.href = 'https://docs.google.com/spreadsheets/d/1gKmAMu8jiLcDQ2fJMaCh8Pb00Uk6ZyqiidTL7zMYVF4/edit?usp=sharing';
+                alert('Número máximo de tentativas excedido! A página será fechada.');
+                window.close();
             } else {
                 alert(`Login ou senha incorretos! Tentativa ${tentativas} de 2.`);
                 location.reload(); // Atualiza a página atual
@@ -89,4 +89,3 @@
 
 </body>
 </html>
-
