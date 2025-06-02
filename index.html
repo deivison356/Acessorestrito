@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Acesso Restrito</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Acesso Restrito</h2>
+    <input type="text" id="login" placeholder="Login">
+    <input type="password" id="senha" placeholder="Senha">
+    <button onclick="verificarLogin()">Entrar</button>
+    <div class="error" id="erro"></div>
+</div>
+
+<script>
+    let tentativas = 0;
+
+    function obterDataAtual() {
+        const hoje = new Date();
+        const dia = String(hoje.getDate()).padStart(2, '0');
+        const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+        const ano = hoje.getFullYear();
+        return `${dia}${mes}${ano}`;
+    }
+
+    function verificarLogin() {
+        const login = document.getElementById('login').value;
+        const senha = document.getElementById('senha').value;
+        const senhaCorreta = obterDataAtual() + '@SENAI';
+
+        if (senha === senhaCorreta) {
+            alert('Login bem-sucedido!');
+            // Aqui pode redirecionar para outra página, se quiser:
+            // window.location.href = 'pagina-protegida.html';
+        } else {
+            tentativas++;
+            document.getElementById('erro').textContent = `Senha incorreta! Tentativa ${tentativas} de 2.`;
+
+            if (tentativas >= 2) {
+                alert('Número máximo de tentativas excedido! Redirecionando...');
+                window.location.href = 'https://docs.google.com/spreadsheets/d/1gKmAMu8jiLcDQ2fJMaCh8Pb00Uk6ZyqiidTL7zMYVF4/edit?usp=sharing';
+                setTimeout(() => {
+                    window.close();
+                }, 1000);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
