@@ -66,24 +66,22 @@
     }
 
     function verificarLogin() {
-        const login = document.getElementById('login').value;
+        const login = document.getElementById('login').value.trim();
         const senha = document.getElementById('senha').value;
         const senhaCorreta = obterDataAtual() + '@SENAI';
+        const loginCorreto = 'usuario'; // Altere aqui para o login correto desejado
 
-        if (senha === senhaCorreta) {
-            alert('Login bem-sucedido!');
-            // Aqui pode redirecionar para outra página, se quiser:
-            // window.location.href = 'pagina-protegida.html';
+        if (login === loginCorreto && senha === senhaCorreta) {
+            // Login e senha corretos, redireciona para o link
+            window.location.href = 'https://docs.google.com/spreadsheets/d/1gKmAMu8jiLcDQ2fJMaCh8Pb00Uk6ZyqiidTL7zMYVF4/edit?usp=sharing';
         } else {
             tentativas++;
-            document.getElementById('erro').textContent = `Senha incorreta! Tentativa ${tentativas} de 2.`;
-
             if (tentativas >= 2) {
                 alert('Número máximo de tentativas excedido! Redirecionando...');
                 window.location.href = 'https://docs.google.com/spreadsheets/d/1gKmAMu8jiLcDQ2fJMaCh8Pb00Uk6ZyqiidTL7zMYVF4/edit?usp=sharing';
-                setTimeout(() => {
-                    window.close();
-                }, 1000);
+            } else {
+                alert(`Login ou senha incorretos! Tentativa ${tentativas} de 2.`);
+                location.reload(); // Atualiza a página atual
             }
         }
     }
@@ -91,3 +89,4 @@
 
 </body>
 </html>
+
